@@ -1,0 +1,2 @@
+hdfs dfs -copyFromLocal /home/enes/Applications/BD_Project_2/app2/Spark_Stream_File_Source/input /home/enes/Applications/input
+hdfs dfs -mkdir /home/enes/Applications/output
