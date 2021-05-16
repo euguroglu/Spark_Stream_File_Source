@@ -15,10 +15,10 @@ if __name__ == "__main__":
     raw_df = spark.readStream \
             .format("json") \
             .option("path", "input") \
-            .option("maxFilesPerTrigger", "1") \ # Process only 1 json file every batch
+            .option("maxFilesPerTrigger", "1") \
             .option("cleanSource", "delete") \
             .load()
-
+# Process only 1 json file every batch
     #raw_df.printSchema()
 
 ## Transform
