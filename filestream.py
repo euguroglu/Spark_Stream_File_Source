@@ -45,7 +45,7 @@ if __name__ == "__main__":
             .option("checkpointLocation", "Filestream/chk-point-dir") \
             .outputMode("append") \
             .queryName("Flattened Invoice Writer") \
-            .trigger(processingTime="1 minute") \ 
+            .trigger(processingTime="1 minute") \
             .start()
 
     invoice_writer_query.awaitTermination()
