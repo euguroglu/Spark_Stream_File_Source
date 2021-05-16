@@ -2,7 +2,7 @@ from pyspark.sql.functions import expr
 from pyspark.sql import *
 
 if __name__ == "__main__":
-    spark = SparkSession
+    spark = SparkSession \
         .builder \
         .appName("File Streaming") \
         .config("spark.streaming.stopGracefullyOnShutdown", "true") \
