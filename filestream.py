@@ -14,7 +14,7 @@ if __name__ == "__main__":
 ## Reading json data from folder
     raw_df = spark.readStream \
             .format("json") \
-            .option("path", "/home/enes/Applications/BD_Project_2/app2/Spark_Stream_File_Source/input") \
+            .option("path", "/home/enes/Applications/input") \
             .option("maxFilesPerTrigger", "1") \
             .option("cleanSource", "delete") \
             .load()
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 ## Sink
 ## Move data to another folder
     invoice_writer_query = flattened_df.writeStream.format("json") \
-            .option("path", "/home/enes/Applications/BD_Project_2/app2/Spark_Stream_File_Source/output") \
+            .option("path", "/home/enes/Applications/output") \
             .option("checkpointLocation", "Filestream/chk-point-dir") \
             .outputMode("append") \
             .queryName("Flattened Invoice Writer") \
