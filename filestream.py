@@ -1,10 +1,14 @@
 from pyspark.sql.functions import expr
 from pyspark.sql import *
 
-
 if __name__ == "__main__":
-    spark = SparkSession.builder.appName("File Streaming").config("spark.streaming.stopGracefullyOnShutdown", "true").config("spark.sql.streaming.schemaInference", "true").getOrCreate()
-
+    spark = SparkSession
+        .builder \
+        .appName("File Streaming") \
+        .config("spark.streaming.stopGracefullyOnShutdown", "true") \
+        .config("spark.sql.streaming.schemaInference", "true") \
+        .master("yarn") \
+        .getOrCreate()
 
 ## Read
 ## Reading json data from folder
@@ -38,7 +42,7 @@ if __name__ == "__main__":
 ## Move data to another folder
     invoice_writer_query = flattened_df.writeStream.format("json") \
             .option("path", "output") \
-            .option("checkpointLocation", "chk-point-dir") \
+            .option("checkpointLocation", "Filestream/chk-point-dir") \
             .outputMode("append") \
             .queryName("Flattened Invoice Writer") \
             .trigger(processingTime="1 minute") \ # trigger processing every 1 minute
