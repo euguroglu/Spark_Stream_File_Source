@@ -1,6 +1,8 @@
 from pyspark.sql.functions import expr
 from pyspark.sql import *
 
+from lib.logger import Log4j
+
 if __name__ == "__main__":
     spark = SparkSession \
         .builder \
@@ -10,6 +12,7 @@ if __name__ == "__main__":
         .master("yarn") \
         .getOrCreate()
 
+    logger = Log4j(spark)
 ## Read
 ## Reading json data from folder
     raw_df = spark.readStream \
@@ -47,5 +50,6 @@ if __name__ == "__main__":
             .queryName("Flattened Invoice Writer") \
             .trigger(processingTime="1 minute") \
             .start()
-
+            
+    logger.info("Flattened Invoice Writer started")
     invoice_writer_query.awaitTermination()
